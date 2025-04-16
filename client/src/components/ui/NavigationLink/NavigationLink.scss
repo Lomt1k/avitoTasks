@@ -1,0 +1,17 @@
+.navigation-link {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+  outline: none;
+  transition: color var(--transition-200);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-neon-blue);
+  }
+
+  &--active {
+    color: var(--color-navy-blue);
+  }
+}
