@@ -1,4 +1,6 @@
 .button {
+  display: flex;
+  align-items: center;
   background-color: var(--color-navy-blue);
   border-radius: 10px;
   border: none;

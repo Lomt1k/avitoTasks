@@ -1,0 +1,15 @@
+.loading-board-card-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__card {
+    background-color: var(--color-white-20);
+    height: 92px;
+    border-radius: 15px;
+    max-width: 800px;
+  }
+}

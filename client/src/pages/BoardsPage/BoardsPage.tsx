@@ -1,11 +1,11 @@
-import { Container } from "../../components/ui"
+import { Boards } from "../../components";
+import './BoardsPage.scss';
 
 const BoardsPage = () => {
   return (
-    <main>
-      <Container>
-        BoardsPage
-      </Container>
+    <main className="boards-page">
+      <h1 className="visually-hidden">Список проектов</h1>
+      <Boards />
     </main>
   )
 }
