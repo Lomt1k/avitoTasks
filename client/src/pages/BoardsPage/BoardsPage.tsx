@@ -1,5 +1,4 @@
 import { Boards } from "../../components";
-import './BoardsPage.scss';
 
 const BoardsPage = () => {
   return (

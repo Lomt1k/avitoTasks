@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { GeneralBoardInfo } from '../../api/Boards';
+import { GeneralBoardInfo } from '../../api/Board';
 import { BoardCard } from './BoardCard';
 import './BoardCardList.scss';
 
