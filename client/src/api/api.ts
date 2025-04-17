@@ -4,7 +4,7 @@ import { z } from "zod";
 export const api = axios.create({
   baseURL: 'http://localhost:8080/api/v1',
   timeout: 1000,
-  validateStatus: _ => true,
+  validateStatus: () => true,
 });
 
 export const ErrorMessageSchema = z.object({

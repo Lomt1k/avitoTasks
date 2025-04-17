@@ -1,5 +1,6 @@
 .task-card {
   display: block;
+  width: 100%;
   background-color: var(--color-white);
   padding: 20px;
   border-radius: 15px;
@@ -7,7 +8,7 @@
   font-family: var(--ff-main);
   border: 2px solid transparent;
   outline: none;
-  cursor              : pointer;
+  cursor: pointer;
   transition: background-color var(--transition-200);
 
   &:hover,

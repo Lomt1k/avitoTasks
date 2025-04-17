@@ -41,3 +41,14 @@ export const fetchTasksFromBoard = async (boardId: number): Promise<Task[]> => {
   }
   return result.data.data;
 }
+
+export const fetchAllTasks = async (): Promise<Task[]> => {
+  const response = await api.get(`/tasks`);
+  validateResponse(response);
+  const result = TasksResponseSchema.safeParse(response.data);
+  if (!result.data) {
+    console.error(result.error);
+    throw result.error;
+  }
+  return result.data.data;
+}

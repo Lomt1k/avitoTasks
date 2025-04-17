@@ -1,11 +1,10 @@
-import { Container } from "../../components/ui"
+import { AllTasks } from "../../components/Tasks";
 
 const IssuesPage = () => {
   return (
     <main>
-      <Container>
-        ISSUES PAGE
-      </Container>
+      <h1 className="visually-hidden">Все задачи</h1>
+      <AllTasks />
     </main>
   )
 }
