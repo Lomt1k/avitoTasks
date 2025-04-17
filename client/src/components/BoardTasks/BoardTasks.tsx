@@ -3,6 +3,7 @@ import { Container, ErrorText } from '../ui';
 import { useBoardTasks } from '../../hooks';
 import { BoardTaskTable } from './BoardTaskTable';
 import RootStore from '../../store/RootStore';
+import { LoadingBoardTaskTable } from './LoadingBoardTaskTable';
 import './BoardTasks.scss';
 
 type BoardTasksProps = {
@@ -25,6 +26,7 @@ const BoardTasks: FC<BoardTasksProps> = ({ boardId }) => {
       <Container>
         <h1 className="board-tasks__title">{boardName}</h1>
         {isError && <ErrorText>При загрузке задач произошла ошибка</ErrorText>}
+        {isFetching && <LoadingBoardTaskTable />}
         {data && <BoardTaskTable />}
       </Container>
     </section>

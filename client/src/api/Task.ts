@@ -8,13 +8,19 @@ export enum TaskStatus {
   Backlog = 'Backlog',
 };
 
+export enum TaskPriority {
+  Low = 'Low',
+  Medium = 'Medium',
+  High = 'High',
+}
+
 export const TaskSchema = z.object({
   assignee: AssigneeSchema,
   boardId: z.number().optional(),
   boardName: z.string().optional(),
   description: z.string(),
   id: z.number(),
-  priority: z.string(),
+  priority: z.enum(Object.values(TaskPriority) as [string, ...string[]]),
   status: z.enum(Object.values(TaskStatus) as [string, ...string[]]),
   title: z.string(),
 });

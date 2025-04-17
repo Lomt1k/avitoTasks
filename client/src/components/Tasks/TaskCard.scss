@@ -1,0 +1,78 @@
+.task-card {
+  display: block;
+  background-color: var(--color-white);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: left;
+  font-family: var(--ff-main);
+  border: 2px solid transparent;
+  outline: none;
+  cursor              : pointer;
+  transition: background-color var(--transition-200);
+
+  &:hover,
+  &:focus-visible {
+    background-color: #ebe8e8;
+  }
+
+  &__info {
+    margin: 0 0 10px;
+  }
+
+  &__title {
+    margin: 0;
+    margin: 0 0 5px;
+  }
+
+  &__stickers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 0 0 10px;
+  }
+
+  &__sticker {
+    color: var(--color-white);
+    font-weight: 500;
+    background-color: var(--color-grey);
+    padding: 2px 8px 0;
+    user-select: none;
+  }
+
+  &__desc {
+    margin: 0;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__user-avatar {
+    border-radius: 50%;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  &__user-name {
+    font-weight: 500;
+  }
+
+  &__user-email {
+    font-size: 14px;
+    color: var(--color-navy-blue);
+    outline: none;
+    transition: var(--transition-200);    
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-green);
+    }
+  }
+}

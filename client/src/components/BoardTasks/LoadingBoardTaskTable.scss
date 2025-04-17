@@ -1,0 +1,14 @@
+.loading-board-task-table {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+
+  &__card {
+    background-color: var(--color-white-20);
+    height: 200px;
+    border-radius: 15px;
+  }
+}
