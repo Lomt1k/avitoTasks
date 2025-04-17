@@ -4,4 +4,11 @@
     flex-direction: column;
     gap: 20px;
   }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
 }

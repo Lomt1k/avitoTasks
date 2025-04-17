@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
 import { useAllTasks } from '../../hooks';
 import RootStore from '../../store/RootStore';
-import { Container } from '../ui';
+import { Container, ErrorText } from '../ui';
 import { FilteredTasksList } from './FilteredTasksList';
+import { CreateTaskButton } from './CreateTaskButton';
+import { LoadingTasksList } from './LoadingTasksList';
 import './AllTasks.scss';
 
 const AllTasks = () => {
   const { data, isFetching, isError } = useAllTasks();
   useEffect(() => RootStore.tasks.setTasks(data), [data]);
-  
+
   return (
     <section className="all-tasks">
       <Container>
@@ -17,7 +19,14 @@ const AllTasks = () => {
             {/* TODO: Тут будет поиск + фильтры */}
             [CONTROLS]
           </div>
-          <FilteredTasksList />
+          {isFetching && <LoadingTasksList />}
+          {isError && <ErrorText>При загрузке задач произошла ошибка</ErrorText>}
+          {data &&
+            <>
+              <FilteredTasksList />
+              <CreateTaskButton />
+            </>
+          }
         </div>
       </Container>
     </section>
