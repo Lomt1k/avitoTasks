@@ -1,28 +1,13 @@
-import { FC, useEffect, useState } from 'react';
-import { TaskWithoutBoard } from '../../api/Task';
-import './BoardTaskTable.scss';
 import { BoardTaskTableColumn } from './BoardTaskTableColumn';
+import { TaskStatus } from '../../api/Task';
+import './BoardTaskTable.scss';
 
-type BoardTaskTableProps = {
-  tasks: TaskWithoutBoard[];
-}
-
-const BoardTaskTable: FC<BoardTaskTableProps> = ({ tasks }) => {
-  const [tasksBacklog, setTasksBacklog] = useState<TaskWithoutBoard[]>([]);
-  const [tasksInProgress, setTasksInProgress] = useState<TaskWithoutBoard[]>([]);
-  const [tasksDone, setTasksDone] = useState<TaskWithoutBoard[]>([]);
-
-  useEffect(() => {
-    setTasksBacklog(tasks.filter(x => x.status === 'Backlog'));
-    setTasksInProgress(tasks.filter(x => x.status === 'InProgress'));
-    setTasksDone(tasks.filter(x => x.status === 'Done'));
-  }, [tasks]);
-
+const BoardTaskTable = () => {
   return (
     <div className="board-task-table">
-      <BoardTaskTableColumn tasks={tasksBacklog} />
-      <BoardTaskTableColumn tasks={tasksInProgress} />
-      <BoardTaskTableColumn tasks={tasksDone} />
+      <BoardTaskTableColumn taskStatus={TaskStatus.Backlog} />
+      <BoardTaskTableColumn taskStatus={TaskStatus.InProgress} />
+      <BoardTaskTableColumn taskStatus={TaskStatus.Done} />
     </div>
   )
 }

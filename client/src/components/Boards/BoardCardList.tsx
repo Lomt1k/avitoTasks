@@ -1,13 +1,11 @@
-import { FC } from 'react';
-import { GeneralBoardInfo } from '../../api/Board';
 import { BoardCard } from './BoardCard';
+import RootStore from '../../store/RootStore';
+import { observer } from 'mobx-react-lite';
 import './BoardCardList.scss';
 
-type BoardCardListProps = {
-  boards: GeneralBoardInfo[];
-}
+const BoardCardList = observer(() => {
+  const boards = RootStore.boards.boards;
 
-const BoardCardList: FC<BoardCardListProps> = ({ boards }) => {
   return (
     <ul className="board-card-list">
       {boards.map(board => (
@@ -17,6 +15,6 @@ const BoardCardList: FC<BoardCardListProps> = ({ boards }) => {
       ))}
     </ul>
   )
-}
+})
 
 export { BoardCardList };

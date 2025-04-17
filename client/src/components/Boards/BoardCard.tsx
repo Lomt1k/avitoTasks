@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { GeneralBoardInfo } from '../../api/Board';
+import { Board } from '../../api/Board';
 import { ButtonLink } from '../ui';
 import './BoardCard.scss';
 
 type BoardCardProps = {
-  board: GeneralBoardInfo;
+  board: Board;
 }
 
 const BoardCard: FC<BoardCardProps> = ({ board }) => {

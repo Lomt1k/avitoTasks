@@ -2,34 +2,33 @@ import { z } from "zod";
 import { AssigneeSchema } from "./User";
 import { api, validateResponse } from "./api";
 
+export enum TaskStatus {
+  Done = 'Done',
+  InProgress = 'InProgress',
+  Backlog = 'Backlog',
+};
+
 export const TaskSchema = z.object({
   assignee: AssigneeSchema,
-  boardId: z.number(),
-  boardName: z.string(),
+  boardId: z.number().optional(),
+  boardName: z.string().optional(),
   description: z.string(),
   id: z.number(),
   priority: z.string(),
-  status: z.string(),
+  status: z.enum(Object.values(TaskStatus) as [string, ...string[]]),
   title: z.string(),
 });
 
-export const TaskWithoutBoardSchema = TaskSchema.omit({
-  boardId: true,
-  boardName: true,
-});
-
-export const TaskWithoutBoardResponseSchema = z.object({
-  data: z.array(TaskWithoutBoardSchema),
+export const TasksResponseSchema = z.object({
+  data: z.array(TaskSchema),
 });
 
 export type Task = z.infer<typeof TaskSchema>;
 
-export type TaskWithoutBoard = z.infer<typeof TaskWithoutBoardSchema>;
-
-export const fetchTasksFromBoard = async (boardId: number): Promise<TaskWithoutBoard[]> => {
+export const fetchTasksFromBoard = async (boardId: number): Promise<Task[]> => {
   const response = await api.get(`/boards/${boardId}`);
   validateResponse(response);
-  const result = TaskWithoutBoardResponseSchema.safeParse(response.data);
+  const result = TasksResponseSchema.safeParse(response.data);
   if (!result.data) {
     console.error(result.error);
     throw result.error;

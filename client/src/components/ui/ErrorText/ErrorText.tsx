@@ -8,7 +8,7 @@ type ErrorTextProps = {
 const ErrorText: FC<ErrorTextProps> = ({ children }) => {
   return (
     <span className='error-text'>
-      {children}
+      {children} 🙄
     </span>
   )
 }

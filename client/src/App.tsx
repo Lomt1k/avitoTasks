@@ -1,7 +1,9 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Header } from "./components";
 import { LoadingPage } from "./pages/LoadingPage";
 import { Navigate, Route, Routes } from "react-router";
+import { useBoards } from "./hooks";
+import RootStore from "./store/RootStore";
 
 const LazyNotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const LazyIssuesPage = lazy(() => import('./pages/IssuesPage'));
@@ -9,6 +11,9 @@ const LazyBoardsPage = lazy(() => import('./pages/BoardsPage'));
 const LazyBoardPage = lazy(() => import('./pages/BoardPage'));
 
 function App() {
+  // Инфа о досках нам нужна на любой странице проекта
+  const { data } = useBoards();
+  useEffect(() => RootStore.boards.setBoards(data), [data]);
 
   return (
     <>
