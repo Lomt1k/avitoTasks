@@ -4,5 +4,6 @@ export { Button, ButtonLink } from './Buttons';
 export { NavigationLink } from './NavigationLink';
 export { ErrorText } from './ErrorText';
 export { Input } from './Input';
+export { TextArea } from './TextArea';
 export { Select, SelectItem } from './Select';
 export { Modal, ModalOverlay } from './Modal';

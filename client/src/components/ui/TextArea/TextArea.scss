@@ -1,10 +1,11 @@
-.input {
+.textarea {
   display: block;
   position: relative;
   width: 100%;
   $root: &;
 
   &__field {
+    min-height: 100px;
     width: 100%;
     padding: 10px;
     background-color: var(--color-white);
@@ -15,6 +16,7 @@
     border-radius: 8px;
     outline: none;
     transition: border-color var(--transition-200);
+    resize: none;
 
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
@@ -35,38 +37,15 @@
     }
   }
 
-  &__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-    color: var(--color-grey);
-    transition: color var(--transition-200);
-  }
-
   &__error {
     display: block;
     color: var(--color-red);
     font-size: 13px;
   }
 
-  &--with-icon #{$root}__field {
-    padding: 10px 10px 10px 34px;
-  }
-
   &--error #{$root}__field {
     border-color: var(--color-red);
     margin-bottom: 5px;
-  }
-
-  &--error #{$root}__icon {
-    color: var(--color-red);
   }
   
 }

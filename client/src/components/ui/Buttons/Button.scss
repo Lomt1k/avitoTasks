@@ -22,4 +22,8 @@
     background-color: var(--color-grey);
     cursor: default;
   }
+
+  &--secondary {
+    background-color: var(--color-black);
+  }
 }
