@@ -4,13 +4,17 @@ import { observer } from 'mobx-react-lite';
 import './FilteredTasksList.scss';
 
 const FilteredTasksList = observer(() => {
-  // TODO: Запилить логику фильтрации и сортировки
-  const search = RootStore.tasks.filterSearch;
+  const filterSearch = RootStore.tasks.filterSearch;
+  const filterStatus = RootStore.tasks.filterStatus;
+  const filterBoardId = RootStore.tasks.filterBoardId;
+
   const tasks = RootStore.tasks.tasks
-    .filter(task => task.title.toLowerCase().includes(search)
-      || task.description.toLowerCase().includes(search)
-      || task.assignee.fullName.toLowerCase().includes(search)
-      || task.assignee.email.toLowerCase().includes(search)
+    .filter(task => filterStatus ? task.status === filterStatus : true)
+    .filter(task => filterBoardId ? task.boardId === filterBoardId : true)
+    .filter(task => task.title.toLowerCase().includes(filterSearch)
+      || task.description.toLowerCase().includes(filterSearch)
+      || task.assignee.fullName.toLowerCase().includes(filterSearch)
+      || task.assignee.email.toLowerCase().includes(filterSearch)
     );
 
   return (

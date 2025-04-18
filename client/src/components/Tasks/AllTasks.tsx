@@ -6,6 +6,7 @@ import { FilteredTasksList } from './FilteredTasksList';
 import { CreateTaskButton } from './CreateTaskButton';
 import { LoadingTasksList } from './LoadingTasksList';
 import { TaskSearch } from './TaskSearch';
+import { TaskFilterStatus } from './TaskFilterStatus';
 import './AllTasks.scss';
 
 const AllTasks = () => {
@@ -18,6 +19,9 @@ const AllTasks = () => {
         <div className="all-tasks__wrapper">
           <div className="all-tasks__controls">
             <TaskSearch />
+            <div className="all-tasks__filters">
+              <TaskFilterStatus />
+            </div>
           </div>
           {isFetching && <LoadingTasksList />}
           {isError && <ErrorText>При загрузке задач произошла ошибка</ErrorText>}

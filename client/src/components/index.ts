@@ -1,11 +1,4 @@
-import { Header } from './Header';
-import { MainNav } from './MainNav';
-import { Boards } from './Boards';
-import { NotFound } from './NotFound';
-
-export {
-  Header,
-  MainNav,
-  Boards,
-  NotFound,
-}
+export { Header } from './Header';
+export { MainNav } from './MainNav';
+export { Boards } from './Boards';
+export { NotFound } from './NotFound';

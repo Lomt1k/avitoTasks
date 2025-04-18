@@ -4,7 +4,8 @@ import { TaskStatus, Task } from "../api/Task";
 export class TasksStore {
   tasks: Task[] = [];
   filterSearch: string = '';
-  filterSortType: string | null = null;
+  filterStatus: TaskStatus | null = null;
+  filterBoardId: number | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -22,7 +23,11 @@ export class TasksStore {
     this.filterSearch = search.toLowerCase();
   }
 
-  setFilterSortType(sortType: string | null) {
-    this.filterSortType = sortType;
+  setFilterStatus(status: TaskStatus | null) {
+    this.filterStatus = status;
+  }
+
+  setFilterBoardId(id: number | null) {
+    this.filterBoardId = id;
   }
 }

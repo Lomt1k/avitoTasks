@@ -1,5 +1,4 @@
 .all-tasks {
-  
   &__wrapper {
     display: flex;
     flex-direction: column;
@@ -8,7 +7,15 @@
 
   &__controls {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 20px;
   }

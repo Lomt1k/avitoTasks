@@ -1,0 +1,29 @@
+.select {
+  position: relative;
+
+  &__field {
+    padding: 9px 30px 9px 9px;
+    font-family: var(--ff-main);
+    font-size: 14px;
+    outline: none;
+    transition: border-color var(--transition-200);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--color-green);
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 50%;
+    right: 9px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}
