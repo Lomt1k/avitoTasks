@@ -1,15 +1,20 @@
+import { useState } from "react";
 import { Button } from "../ui";
+import { CreateTaskModal } from "../CreateTaskModal/CreateTaskModal";
 import './CreateTaskButton.scss';
 
 const CreateTaskButton = () => {
-  const hadleCreateTaskClick = () => {
-    // TODO
-  }
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
   return (
-    <Button className="create-task-button" onClick={hadleCreateTaskClick}>
-      Создать задачу
-    </Button>
+    <>
+      <Button className="create-task-button" onClick={() => setIsModalOpened(true)}>
+        Создать задачу
+      </Button>
+      {isModalOpened &&
+        <CreateTaskModal onClickClose={() => setIsModalOpened(false)} />
+      }
+    </>
   )
 }
 
