@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, useEffect } from 'react';
 import { TaskStatus } from '../../api/Task';
 import { getStatusLocalization } from '../../utils/TaskHelper';
 import { Select, SelectItem } from '../ui';
@@ -12,6 +12,10 @@ const TaskFilterStatus = () => {
     const filterStatus = statuses.includes(status) ? status : null;
     RootStore.tasks.setFilterStatus(filterStatus);
   }
+
+  useEffect(() => {
+    return () => RootStore.tasks.setFilterStatus(null);
+  }, []);
 
   return (
     <Select

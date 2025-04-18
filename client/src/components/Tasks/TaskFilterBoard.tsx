@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, useEffect } from 'react';
 import { Select, SelectItem } from '../ui';
 import { observer } from 'mobx-react-lite';
 import RootStore from '../../store/RootStore';
@@ -11,6 +11,10 @@ const TaskFilterBoard = observer(() => {
     const filterBoardId = isNaN(boardId) ? null : boardId;
     RootStore.tasks.setFilterBoardId(filterBoardId);
   }
+
+  useEffect(() => {
+    return () => RootStore.tasks.setFilterBoardId(null);
+  }, []);
 
   return (
     <Select

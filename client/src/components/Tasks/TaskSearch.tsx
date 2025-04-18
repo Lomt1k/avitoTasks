@@ -1,4 +1,4 @@
-import { FormEventHandler } from "react";
+import { FormEventHandler, useEffect } from "react";
 import { Input } from "../ui";
 import IconSearch from '/src/assets/icons/search.svg?react';
 import RootStore from "../../store/RootStore";
@@ -8,6 +8,10 @@ const TaskSearch = () => {
   const handleInput: FormEventHandler<HTMLInputElement> = (e) => {
     RootStore.tasks.setFilterSearch(e.currentTarget.value);
   }
+
+  useEffect(() => {
+    return () => RootStore.tasks.setFilterSearch('');
+  }, []);
 
   return (
     <Input
