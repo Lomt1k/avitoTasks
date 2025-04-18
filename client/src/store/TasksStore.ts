@@ -19,7 +19,7 @@ export class TasksStore {
   }
 
   setFilterSearch(search: string) {
-    this.filterSearch = search;
+    this.filterSearch = search.toLowerCase();
   }
 
   setFilterSortType(sortType: string | null) {

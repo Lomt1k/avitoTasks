@@ -9,11 +9,11 @@
   border: 2px solid transparent;
   outline: none;
   cursor: pointer;
-  transition: background-color var(--transition-200);
+  transition: border-color var(--transition-200);
 
   &:hover,
   &:focus-visible {
-    background-color: #ebe8e8;
+    border-color: var(--color-green);
   }
 
   &__info {

@@ -5,12 +5,18 @@ import './FilteredTasksList.scss';
 
 const FilteredTasksList = observer(() => {
   // TODO: Запилить логику фильтрации и сортировки
-  const tasks = RootStore.tasks.tasks;
-  
+  const search = RootStore.tasks.filterSearch;
+  const tasks = RootStore.tasks.tasks
+    .filter(task => task.title.toLowerCase().includes(search)
+      || task.description.toLowerCase().includes(search)
+      || task.assignee.fullName.toLowerCase().includes(search)
+      || task.assignee.email.toLowerCase().includes(search)
+    );
+
   return (
     <ul className="filtered-tasks-list">
       {tasks.map(task => (
-        <li>
+        <li key={task.id}>
           <TaskCard task={task} />
         </li>
       ))}
