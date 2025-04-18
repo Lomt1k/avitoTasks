@@ -6,6 +6,7 @@ import { FilteredTasksList } from './FilteredTasksList';
 import { CreateTaskButton } from './CreateTaskButton';
 import { LoadingTasksList } from './LoadingTasksList';
 import { TaskSearch } from './TaskSearch';
+import { TaskFilterBoard } from './TaskFilterBoard';
 import { TaskFilterStatus } from './TaskFilterStatus';
 import './AllTasks.scss';
 
@@ -20,6 +21,7 @@ const AllTasks = () => {
           <div className="all-tasks__controls">
             <TaskSearch />
             <div className="all-tasks__filters">
+              <TaskFilterBoard />
               <TaskFilterStatus />
             </div>
           </div>

@@ -41,7 +41,8 @@
     justify-content: center;
     position: absolute;
     left: 10px;
-    top: 7px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 24px;
     height: 24px;
     pointer-events: none;

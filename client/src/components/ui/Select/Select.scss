@@ -2,7 +2,7 @@
   position: relative;
 
   &__field {
-    padding: 9px 30px 9px 9px;
+    padding: 10px 30px 10px 10px;
     font-family: var(--ff-main);
     font-size: 14px;
     outline: none;
@@ -22,7 +22,7 @@
     width: 12px;
     height: 12px;
     top: 50%;
-    right: 9px;
+    right: 10px;
     transform: translateY(-50%);
     pointer-events: none;
   }
