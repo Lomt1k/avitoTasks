@@ -2,6 +2,7 @@
   position: relative;
 
   &__field {
+    width: 100%;
     padding: 10px 30px 10px 10px;
     font-family: var(--ff-main);
     font-size: 14px;
@@ -11,9 +12,13 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 
-    &:hover,
+    &:hover:not(:disabled),
     &:focus-visible {
       border-color: var(--color-green);
+    }
+
+    &:disabled ~ .select__arrow {
+      opacity: 0.2;
     }
   }
 
@@ -25,5 +30,6 @@
     right: 10px;
     transform: translateY(-50%);
     pointer-events: none;
+    color: var(--color-black);
   }
 }

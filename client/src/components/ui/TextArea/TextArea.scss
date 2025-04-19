@@ -19,12 +19,12 @@
     resize: none;
 
     &:hover:not(:disabled),
-    &:focus-visible:not(:disabled) {
+    &:focus-visible {
       border-color: var(--color-green);
     }
 
     &:hover:not(:disabled) ~ #{$root}__icon,
-    &:focus-visible:not(:disabled) ~ #{$root}__icon {
+    &:focus-visible ~ #{$root}__icon {
       color: var(--color-green);
     }
 

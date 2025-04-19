@@ -3,9 +3,9 @@ import { AssigneeSchema } from "./User";
 import { api, validateResponse } from "./api";
 
 export enum TaskStatus {
-  Done = 'Done',
-  InProgress = 'InProgress',
   Backlog = 'Backlog',
+  InProgress = 'InProgress',
+  Done = 'Done',
 };
 
 export enum TaskPriority {
