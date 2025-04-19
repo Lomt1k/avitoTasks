@@ -3,13 +3,12 @@ import IconDropdown from '../../../assets/icons/dropdown.svg?react';
 import './Select.scss';
 
 type SelectProps = {
-  name: string,
-  id: string,
-  className?: string,
   children: ReactNode,
+  className?: string,
+  error?: string,
 } & SelectHTMLAttributes<HTMLSelectElement>;
 
-const Select: FC<SelectProps> = ({ className, children, ...rest }) => {
+const Select: FC<SelectProps> = ({ className, children, error, ...rest }) => {
   const classes = 'select__field' + (className ? ` ${className}` : '');
 
   return (
@@ -20,6 +19,7 @@ const Select: FC<SelectProps> = ({ className, children, ...rest }) => {
       >
         {children}
       </select>
+      {error && <span className='select__error'>{error}</span>}
       <IconDropdown className='select__arrow' aria-hidden={true} />
     </div>
   )

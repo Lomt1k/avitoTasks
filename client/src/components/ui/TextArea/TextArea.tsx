@@ -2,13 +2,11 @@ import { FC, TextareaHTMLAttributes } from 'react';
 import './TextArea.scss';
 
 type TextAreaProps = {
-  name: string;
-  id: string;
   error?: string;
   className?: string;
 } & TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-const TextArea: FC<TextAreaProps> = ({ name, id, error, className, ...rest}) => {
+const TextArea: FC<TextAreaProps> = ({ error, className, ...rest}) => {
   const classes = 'textarea'
     + (error ? ' textarea--errror' : '')
     + (className ? ` ${className}` : '');

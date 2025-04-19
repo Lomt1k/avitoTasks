@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../ui";
-import { CreateTaskModal } from "../CreateTaskModal/CreateTaskModal";
+import { CreateTaskModal } from "../CreateTaskModal";
 import './CreateTaskButton.scss';
 
 const CreateTaskButton = () => {

@@ -4,7 +4,7 @@ import { fetchBoards } from "../api/Board";
 export const useBoards = () => {
   const query = useQuery({
     queryKey: ['boards', 'list'],
-    queryFn: fetchBoards
+    queryFn: fetchBoards,
   });
 
   const { data, isFetching, isError } = query;

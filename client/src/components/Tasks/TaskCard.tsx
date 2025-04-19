@@ -1,7 +1,7 @@
 import { FC, memo, useState } from 'react';
 import { Task } from '../../api/Task';
 import { getPriorityLocalization, getStatusLocalization } from '../../utils/TaskHelper';
-import { CreateTaskModal } from '../CreateTaskModal/CreateTaskModal';
+import { UpdateTaskModal } from '../CreateTaskModal';
 import './TaskCard.scss';
 
 type TaskCardProps = {
@@ -42,7 +42,7 @@ const TaskCard: FC<TaskCardProps> = memo(({ task }) => {
         </div>
       </button>
       {isModalOpened &&
-        <CreateTaskModal task={task} onClickClose={() => setIsModalOpened(false)} />
+        <UpdateTaskModal task={task} onClickClose={() => setIsModalOpened(false)} />
       }
     </>
   );

@@ -1,65 +1,61 @@
 import { FC } from 'react';
-import { Button, ButtonLink, Input, Modal, Select, SelectItem, TextArea } from '../ui';
-import { Task, TaskPriority, TaskSchema, TaskStatus } from '../../api/Task';
+import { Button, Input, Modal, Select, SelectItem, TextArea } from '../ui';
+import { CreateTaskData, CreateTaskSchema, fetchCreateTask, TaskPriority } from '../../api/Task';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { getPriorityLocalization, getStatusLocalization } from '../../utils/TaskHelper';
+import { getPriorityLocalization } from '../../utils/TaskHelper';
 import { observer } from 'mobx-react-lite';
 import RootStore from '../../store/RootStore';
-import './CreateTaskModal.scss';
+import { useUsers } from '../../hooks/useUsers';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import './TaskModal.scss';
 
 type CreateTaskModalProps = {
   onClickClose: () => void;
-  task?: Task;
 }
 
 const priorities = Object.values(TaskPriority);
-const statuses = Object.values(TaskStatus);
 
-/// Если таск не прокидывается - это окно создания таска
-/// Если прокидывается - окно редактирования
+const CreateTaskModal: FC<CreateTaskModalProps> = observer(({ onClickClose }) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<CreateTaskData>({
+    resolver: zodResolver(CreateTaskSchema)
+  });
+  const { data: users, isError: isUsersError } = useUsers();
+  const queryClient = useQueryClient();
+  const boards = RootStore.boards.boards;
 
-const CreateTaskModal: FC<CreateTaskModalProps> = observer(({ onClickClose, task }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<Task>({
-    resolver: zodResolver(TaskSchema)
+  const createTaskMutation = useMutation({
+    mutationKey: ['task', 'create'],
+    mutationFn: fetchCreateTask,
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      onClickClose();
+    }
   });
 
-  const boards = RootStore.boards.boards;
-  const currentBoardId = RootStore.boards.currentBoardId;
-
   return (
-    <Modal className='create-task-modal' onClickClose={onClickClose}>
-      <form onSubmit={handleSubmit(editedTask => {
-        // TODO: mutation
-        console.log(editedTask);
+    <Modal className='task-modal' onClickClose={onClickClose}>
+      <form onSubmit={handleSubmit(taskData => {
+        createTaskMutation.mutate(taskData);
       })}
       >
-        <h3 className="create-task-modal__heading">
-          {task ? 'Редактирование задачи' : 'Создание задачи'}
-        </h3>
-        <div className="create-task-modal__fields">
+        <h3 className="task-modal__heading">Создание задачи</h3>
+        <div className="task-modal__fields">
           <Input
-            {...register('title')}
             type='text'
-            defaultValue={task?.title}
             placeholder='Название'
-            autoFocus={!task}
+            autoFocus
             error={errors.title?.message}
+            {...register('title')}
           />
           <TextArea
             {...register('description')}
-            name='task-description'
-            id='task-description'
-            defaultValue={task?.description}
             placeholder='Описание'
             error={errors.description?.message}
           />
           <Select
-            {...register('boardId')}
-            name='task-board'
-            id='task-board'
-            disabled={!!currentBoardId}
-            defaultValue={currentBoardId ?? task?.boardId}
+            error={errors.boardId?.message}
+            {...register('boardId', { setValueAs: value => Number(value) })}
           >
             {boards.map(board => (
               <SelectItem key={board.id} value={board.id.toString()}>
@@ -68,10 +64,8 @@ const CreateTaskModal: FC<CreateTaskModalProps> = observer(({ onClickClose, task
             ))}
           </Select>
           <Select
+            error={errors.priority?.message}
             {...register('priority')}
-            name='task-priority'
-            id='task-priority'
-            defaultValue={task?.priority}
           >
             {priorities.map(priority => (
               <SelectItem key={priority} value={priority.toString()}>
@@ -80,26 +74,19 @@ const CreateTaskModal: FC<CreateTaskModalProps> = observer(({ onClickClose, task
             ))}
           </Select>
           <Select
-            {...register('status')}
-            name='task-status'
-            id='task-status'
-            defaultValue={task?.status}
+            error={isUsersError ? 'Произошла ошибка при подгрузке пользователей' : errors.assigneeId?.message}
+            {...register('assigneeId', { setValueAs: value => Number(value) })}
           >
-            {statuses.map(status => (
-              <SelectItem key={status} value={status.toString()}>
-                {getStatusLocalization(status)}
+            {users && users.map(user => (
+              <SelectItem key={user.id} value={user.id.toString()}>
+                {user.fullName}
               </SelectItem>
             ))}
           </Select>
         </div>
-        <div className="create-task-modal__buttons">
-          {task?.boardId &&
-            <ButtonLink secondary to={`/board/${task.boardId}`}>
-              Перейти на доску
-            </ButtonLink>
-          }
-          <Button className='create-task-modal__submit-btn' submit>
-            {task ? 'Обновить' : 'Создать'}
+        <div className="task-modal__buttons">
+          <Button className='task-modal__submit-btn' submit>
+            Создать
           </Button>
         </div>
       </form>

@@ -3,7 +3,7 @@ import { fetchTasksFromBoard } from "../api/Task";
 
 export const useBoardTasks = (boardId: number) => {
   const query = useQuery({
-    queryKey: ['board', boardId],
+    queryKey: ['tasks'],
     queryFn: () => fetchTasksFromBoard(boardId),
   });
 

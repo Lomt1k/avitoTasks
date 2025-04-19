@@ -15,7 +15,7 @@ export const ErrorMessageSchema = z.object({
 export type ErrorMessage = z.infer<typeof ErrorMessageSchema>;
 
 export const validateResponse = (response: AxiosResponse): void => {
-  if (response.status === 200) {
+  if ([200, 201].includes(response.status)) {
     return;
   }
 
