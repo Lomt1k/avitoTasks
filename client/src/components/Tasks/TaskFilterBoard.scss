@@ -1,0 +1,7 @@
+.task-filter-board {
+  max-width: 200px;
+
+  @include vp-450 {
+    max-width: unset;
+  }
+}

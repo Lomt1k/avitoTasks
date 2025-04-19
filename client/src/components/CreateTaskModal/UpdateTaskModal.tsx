@@ -45,9 +45,11 @@ const UpdateTaskModal: FC<UpdateTaskModalProps> = observer(({ onClickClose, task
 
   return (
     <Modal className='task-modal' onClickClose={onClickClose}>
-      <form onSubmit={handleSubmit(taskUpdate => {
-        updateTaskMutation.mutate({ id: task.id, taskUpdate });
-      })}
+      <form
+        className='task-modal__form'
+        onSubmit={handleSubmit(taskUpdate => {
+          updateTaskMutation.mutate({ id: task.id, taskUpdate });
+        })}
       >
         <h3 className="task-modal__heading">Редактирование задачи</h3>
         <div className="task-modal__fields">

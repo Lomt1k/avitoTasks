@@ -22,7 +22,7 @@ const Modal: FC<ModalProps> = ({ children, onClickClose, className }) => {
           aria-label='Закрыть'
           onClick={onClickClose}
         >
-          <IconClose width={20} height={20} aria-hidden={true} />
+          <IconClose width={25} height={25} aria-hidden={true} />
         </button>
         {children}
       </div>

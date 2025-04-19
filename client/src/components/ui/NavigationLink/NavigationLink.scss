@@ -6,6 +6,10 @@
   outline: none;
   transition: color var(--transition-200);
 
+  @include vp-767 {
+    font-size: 18px;
+  }
+
   &:hover,
   &:focus-visible {
     color: var(--color-green);

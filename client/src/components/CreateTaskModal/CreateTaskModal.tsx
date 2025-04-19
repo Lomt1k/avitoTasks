@@ -35,9 +35,11 @@ const CreateTaskModal: FC<CreateTaskModalProps> = observer(({ onClickClose }) =>
 
   return (
     <Modal className='task-modal' onClickClose={onClickClose}>
-      <form onSubmit={handleSubmit(taskData => {
-        createTaskMutation.mutate(taskData);
-      })}
+      <form
+        className='task-modal__form'
+        onSubmit={handleSubmit(taskData => {
+          createTaskMutation.mutate(taskData);
+        })}
       >
         <h3 className="task-modal__heading">Создание задачи</h3>
         <div className="task-modal__fields">

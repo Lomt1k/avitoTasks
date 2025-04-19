@@ -9,9 +9,15 @@
   padding: 10px 20px;
   color: var(--color-white);
   font-family: var(--ff-main);
+  font-size: 16px;
   font-weight: 600;
   text-align: center;
   transition: background-color var(--transition-200);
+
+  @include vp-767 {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
 
   &:hover:not(:disabled),
   &:focus-visible {

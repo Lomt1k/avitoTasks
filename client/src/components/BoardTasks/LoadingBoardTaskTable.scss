@@ -6,6 +6,10 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 
+  @include vp-767 {
+    grid-template-columns: 1fr;
+  }
+
   &__card {
     background-color: var(--color-white-20);
     height: 200px;

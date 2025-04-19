@@ -2,6 +2,7 @@ import { ChangeEventHandler, useEffect } from 'react';
 import { Select, SelectItem } from '../ui';
 import { observer } from 'mobx-react-lite';
 import RootStore from '../../store/RootStore';
+import './TaskFilterBoard.scss';
 
 const TaskFilterBoard = observer(() => {
   const boards = RootStore.boards.boards;
@@ -18,10 +19,10 @@ const TaskFilterBoard = observer(() => {
 
   return (
     <Select
+      className='task-filter-board'
       name='task-filter-board'
       id='task-filter-board'
       onChange={handleChange}
-      style={{ maxWidth: 200 }}
     >
       <SelectItem value='all'>Все проекты</SelectItem>
       {boards.map(board => (

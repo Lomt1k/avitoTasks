@@ -48,10 +48,18 @@
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: 850px) {
+      gap: 10px;
+    }
   }
 
   &__user-avatar {
     border-radius: 50%;
+
+    @media (max-width: 850px) {
+      height: 30px;
+    }
   }
 
   &__user-info {
