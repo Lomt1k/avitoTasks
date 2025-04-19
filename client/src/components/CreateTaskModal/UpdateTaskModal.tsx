@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import { getPriorityLocalization, getStatusLocalization } from '../../utils/TaskHelper';
 import { observer } from 'mobx-react-lite';
 import RootStore from '../../store/RootStore';
-import { useUsers } from '../../hooks/useUsers';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useUsers } from '../../hooks';
 import './TaskModal.scss';
 
 type UpdateTaskModalProps = {

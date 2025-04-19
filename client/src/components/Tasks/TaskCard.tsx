@@ -6,14 +6,21 @@ import './TaskCard.scss';
 
 type TaskCardProps = {
   task: Task,
+  onDragStart?: (taskId: number) => void;
 }
 
-const TaskCard: FC<TaskCardProps> = memo(({ task }) => {
+const TaskCard: FC<TaskCardProps> = memo(({ task, onDragStart }) => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
   return (
     <>
-      <button className="task-card" onClick={() => setIsModalOpened(true)} type="button">
+      <button
+        className="task-card"
+        onClick={() => setIsModalOpened(true)}
+        type="button"
+        draggable={!!onDragStart}
+        onDragStart={() => { if (onDragStart) onDragStart(task.id) }}
+      >
         <div className="task-card__info">
           <h4 className="task-card__title">{task.title}</h4>
           <div className="task-card__stickers">

@@ -90,3 +90,8 @@ export const fetchUpdateTask = async (taskId: number, data: UpdateTaskData): Pro
   const response = await api.put(`/tasks/update/${taskId}`, data);
   validateResponse(response);
 }
+
+export const fetchUpdateTaskStatus = async (taskId: number, status: TaskStatus): Promise<void> => {
+  const response = await api.put(`/tasks/updateStatus/${taskId}`, { status });
+  validateResponse(response);
+}
