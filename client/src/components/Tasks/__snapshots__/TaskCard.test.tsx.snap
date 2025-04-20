@@ -1,0 +1,65 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TaskCard > Снапшот 1`] = `
+<div>
+  <button
+    class="task-card"
+    draggable="false"
+    type="button"
+  >
+    <div
+      class="task-card__info"
+    >
+      <h4
+        class="task-card__title"
+      >
+        Task
+      </h4>
+      <div
+        class="task-card__stickers"
+      >
+        <span
+          class="task-card__sticker"
+        >
+          Низкий
+        </span>
+        <span
+          class="task-card__sticker"
+        >
+          Нужно сделать
+        </span>
+      </div>
+      <p
+        class="task-card__desc"
+      >
+        Description
+      </p>
+    </div>
+    <div
+      class="task-card__user"
+    >
+      <img
+        alt="User"
+        class="task-card__user-avatar"
+        height="45"
+        src="http://example.com/avatar.jpg"
+      />
+      <div
+        class="task-card__user-info"
+      >
+        <span
+          class="task-card__user-name"
+        >
+          User
+        </span>
+        <a
+          class="task-card__user-email"
+          href="mailto:user@example.com"
+        >
+          user@example.com
+        </a>
+      </div>
+    </div>
+  </button>
+</div>
+`;

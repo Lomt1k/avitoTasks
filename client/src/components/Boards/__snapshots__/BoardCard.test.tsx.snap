@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BoardCard > Снапшот 1`] = `
+<div>
+  <div
+    class="board-card"
+  >
+    <div
+      class="board-card__info"
+    >
+      <div
+        class="board-card__info-top"
+      >
+        <span
+          class="board-card__title"
+        >
+          Board
+        </span>
+        <span
+          class="board-card__task-counter"
+        >
+          5
+        </span>
+      </div>
+      <span>
+        Description
+      </span>
+    </div>
+    <a
+      class="button"
+      data-discover="true"
+      href="/board/1"
+    >
+      Перейти к доске
+    </a>
+  </div>
+</div>
+`;
+
+exports[`BoardCard > Создает снапшот 1`] = `
+<div>
+  <div
+    class="board-card"
+  >
+    <div
+      class="board-card__info"
+    >
+      <div
+        class="board-card__info-top"
+      >
+        <span
+          class="board-card__title"
+        >
+          Board
+        </span>
+        <span
+          class="board-card__task-counter"
+        >
+          5
+        </span>
+      </div>
+      <span>
+        Description
+      </span>
+    </div>
+    <a
+      class="button"
+      data-discover="true"
+      href="/board/1"
+    >
+      Перейти к доске
+    </a>
+  </div>
+</div>
+`;
