@@ -1,13 +1,9 @@
 import { FC } from 'react';
 import { Button, Input, Modal, Select, SelectItem, TextArea } from '../ui';
-import { CreateTaskData, CreateTaskSchema, fetchCreateTask, TaskPriority } from '../../api/Task';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { TaskPriority } from '../../api/Task';
 import { getPriorityLocalization } from '../../utils/TaskHelper';
 import { observer } from 'mobx-react-lite';
-import RootStore from '../../store/RootStore';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useUsers } from '../../hooks';
+import { useCreateTaskForm } from '../../hooks';
 import './TaskModal.scss';
 
 type CreateTaskModalProps = {
@@ -17,30 +13,11 @@ type CreateTaskModalProps = {
 const priorities = Object.values(TaskPriority);
 
 const CreateTaskModal: FC<CreateTaskModalProps> = observer(({ onClickClose }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<CreateTaskData>({
-    resolver: zodResolver(CreateTaskSchema)
-  });
-  const { data: users, isError: isUsersError } = useUsers();
-  const queryClient = useQueryClient();
-  const boards = RootStore.boards.boards;
-
-  const createTaskMutation = useMutation({
-    mutationKey: ['task', 'create'],
-    mutationFn: fetchCreateTask,
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-      onClickClose();
-    }
-  });
+  const { register, onSubmit, errors, users, isUsersError, boards } = useCreateTaskForm(onClickClose);
 
   return (
     <Modal className='task-modal' onClickClose={onClickClose}>
-      <form
-        className='task-modal__form'
-        onSubmit={handleSubmit(taskData => {
-          createTaskMutation.mutate(taskData);
-        })}
-      >
+      <form className='task-modal__form' onSubmit={onSubmit}>
         <h3 className="task-modal__heading">Создание задачи</h3>
         <div className="task-modal__fields">
           <Input
@@ -51,9 +28,9 @@ const CreateTaskModal: FC<CreateTaskModalProps> = observer(({ onClickClose }) =>
             {...register('title')}
           />
           <TextArea
-            {...register('description')}
             placeholder='Описание'
             error={errors.description?.message}
+            {...register('description')}
           />
           <Select
             error={errors.boardId?.message}
@@ -87,9 +64,7 @@ const CreateTaskModal: FC<CreateTaskModalProps> = observer(({ onClickClose }) =>
           </Select>
         </div>
         <div className="task-modal__buttons">
-          <Button className='task-modal__submit-btn' submit>
-            Создать
-          </Button>
+          <Button className='task-modal__submit-btn' submit>Создать</Button>
         </div>
       </form>
     </Modal>

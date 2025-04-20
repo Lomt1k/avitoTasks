@@ -1,16 +1,12 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Button, ButtonLink, Input, Modal, Select, SelectItem, TextArea } from '../ui';
-import { fetchUpdateTask, Task, TaskPriority, TaskStatus, UpdateTaskData, UpdateTaskSchema } from '../../api/Task';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { Task, TaskPriority, TaskStatus } from '../../api/Task';
 import { getPriorityLocalization, getStatusLocalization } from '../../utils/TaskHelper';
 import { observer } from 'mobx-react-lite';
-import RootStore from '../../store/RootStore';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useUsers } from '../../hooks';
+import { useEditTaskForm } from '../../hooks';
 import './TaskModal.scss';
 
-type UpdateTaskModalProps = {
+type EditTaskModalProps = {
   onClickClose: () => void;
   task: Task;
 }
@@ -18,51 +14,22 @@ type UpdateTaskModalProps = {
 const priorities = Object.values(TaskPriority);
 const statuses = Object.values(TaskStatus);
 
-const UpdateTaskModal: FC<UpdateTaskModalProps> = observer(({ onClickClose, task }) => {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<UpdateTaskData>({
-    resolver: zodResolver(UpdateTaskSchema)
-  });
-  const { data: users, isError: isUsersError } = useUsers();
-  const queryClient = useQueryClient();
-  const boardName = task.boardName ?? RootStore.boards.currentBoard?.name;
-
-  const updateTaskMutation = useMutation({
-    mutationKey: ['task', 'update', task.id],
-    mutationFn: ({ id, taskUpdate }: { id: number; taskUpdate: UpdateTaskData }) => {
-      return fetchUpdateTask(id, taskUpdate);
-    },
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-      onClickClose();
-    }
-  });
-
-  useEffect(() => {
-    if (users && task.assignee.id) {
-      setValue('assigneeId', task.assignee.id);
-    }
-  }, [users, task.assignee.id]);
+const EditTaskModal: FC<EditTaskModalProps> = observer(({ onClickClose, task }) => {
+  const { register, onSubmit, errors, users, isUsersError, boardName } = useEditTaskForm(task, onClickClose);
 
   return (
     <Modal className='task-modal' onClickClose={onClickClose}>
-      <form
-        className='task-modal__form'
-        onSubmit={handleSubmit(taskUpdate => {
-          updateTaskMutation.mutate({ id: task.id, taskUpdate });
-        })}
-      >
+      <form className='task-modal__form' onSubmit={onSubmit}>
         <h3 className="task-modal__heading">Редактирование задачи</h3>
         <div className="task-modal__fields">
           <Input
             placeholder='Название'
             type='text'
-            defaultValue={task.title}
             error={errors.title?.message}
             {...register('title')}
           />
           <TextArea
             placeholder='Описание'
-            defaultValue={task.description}
             error={errors.description?.message}
             {...register('description')}
           />
@@ -74,7 +41,6 @@ const UpdateTaskModal: FC<UpdateTaskModalProps> = observer(({ onClickClose, task
             </Select>
           }
           <Select
-            defaultValue={task.priority}
             error={errors.priority?.message}
             {...register('priority')}
           >
@@ -85,7 +51,6 @@ const UpdateTaskModal: FC<UpdateTaskModalProps> = observer(({ onClickClose, task
             ))}
           </Select>
           <Select
-            defaultValue={task.status}
             error={errors.status?.message}
             {...register('status')}
           >
@@ -96,12 +61,11 @@ const UpdateTaskModal: FC<UpdateTaskModalProps> = observer(({ onClickClose, task
             ))}
           </Select>
           <Select
-            defaultValue={task.assignee.id}
             error={isUsersError ? 'Произошла ошибка при подгрузке пользователей' : errors.assigneeId?.message}
             {...register('assigneeId', { setValueAs: value => Number(value) })}
           >
             {users && users.map(user => (
-              <SelectItem key={user.id} value={user.id.toString()} defaultChecked={user.id === task.assignee.id}>
+              <SelectItem key={user.id} value={user.id.toString()}>
                 {user.fullName}
               </SelectItem>
             ))}
@@ -113,13 +77,11 @@ const UpdateTaskModal: FC<UpdateTaskModalProps> = observer(({ onClickClose, task
               Перейти на доску
             </ButtonLink>
           }
-          <Button className='task-modal__submit-btn' submit>
-            Обновить
-          </Button>
+          <Button className='task-modal__submit-btn' submit>Обновить</Button>
         </div>
       </form>
     </Modal>
   )
 })
 
-export { UpdateTaskModal };
+export { EditTaskModal };
